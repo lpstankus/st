@@ -62,6 +62,7 @@ static void ttysend(const Arg *);
 
 /* config.h for applying patches and the configuration. */
 #include "config.h"
+#include "theme.h"
 
 /* XEMBED messages */
 #define XEMBED_FOCUS_IN  4
