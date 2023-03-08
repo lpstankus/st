@@ -20,6 +20,8 @@ static void drawboxlines(int, int, int, int, XftColor *, ushort);
 
 /* public API */
 
+#define INDENT_MARK 0x1FB70
+
 void
 boxdraw_xinit(Display *dpy, Colormap cmap, XftDraw *draw, Visual *vis)
 {
@@ -31,7 +33,8 @@ isboxdraw(Rune u)
 {
 	Rune block = u & ~0xff;
 	return (boxdraw && block == 0x2500 && boxdata[(uint8_t)u]) ||
-	       (boxdraw_braille && block == 0x2800);
+	       (boxdraw_braille && block == 0x2800) ||
+	       (boxdraw && u == INDENT_MARK);
 }
 
 /* the "index" is actually the entire shape data encoded as ushort */
@@ -42,6 +45,8 @@ boxdrawindex(const Glyph *g)
 		return BRL | (uint8_t)g->u;
 	if (boxdraw_bold && (g->mode & ATTR_BOLD))
 		return BDB | boxdata[(uint8_t)g->u];
+	if (g->u == INDENT_MARK)
+		return BDL;
 	return boxdata[(uint8_t)g->u];
 }
 
@@ -58,6 +63,11 @@ drawboxes(int x, int y, int cw, int ch, XftColor *fg, XftColor *bg,
 void
 drawbox(int x, int y, int w, int h, XftColor *fg, XftColor *bg, ushort bd)
 {
+	if (bd == BDL) {
+		XftDrawRect(xd, fg, x, y, 1, h);
+		return;
+	}
+
 	ushort cat = bd & ~(BDB | 0xff);  /* mask out bold and data */
 	if (bd & (BDL | BDA)) {
 		/* lines (light/double/heavy/arcs) */
