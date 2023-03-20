@@ -15,11 +15,11 @@
 /* ===== Border ===================================================== */
 static int borderpx = 0;
 
-/* ===== Fonts and cursor ======-==================================== */
-static char *font = "JetBrainsMono:pixelsize=12:antialias=true:autohint=true";
+/* ===== Fonts and cursor =========================================== */
+// static char *font = "bm437 ati 8x14:pixelsize=15:antialias=true:autohint=true";
+static char *font = "victor mono:pixelsize=13:antialias=true:autohint=true";
 static char *font2[] = {
-	"inconsolata nerd font:pixelsize=12:antialias=true:autohint=true"
-};
+    "inconsolata nerd font:pixelsize=12:antialias=true:autohint=true"};
 
 /*
  * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Ps-SP-q.1D81
@@ -34,7 +34,7 @@ static char *font2[] = {
  * 7: Blinking st cursor
  * 8: Steady st cursor
  */
-static unsigned int cursorstyle = 1;
+static unsigned int cursorstyle = 2;
 static Rune stcursor = 0x2603; /* snowman (U+2603) */
 
 /*
@@ -89,36 +89,36 @@ const int boxdraw_braille = 0;
 /*
  * bg opacity
  */
-float alpha = 0.7;
+float alpha = 0.9;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	/* 8 normal colors */
-	"#000000", /* black   */
-	"#FF3333", /* red     */
-	"#B8CC52", /* green   */
-	"#FF8F40", /* yellow  */
-	"#59C2FF", /* blue    */
-	"#D4BFFF", /* magenta */
-	"#95E6CB", /* cyan    */
-	"#cccccc", /* white   */
+    /* 8 normal colors */
+    "#131415", /* black   */
+    "#c03b3b", /* red     */
+    "#2ec09c", /* green   */
+    "#e7c547", /* yellow  */
+    "#7aa6ff", /* blue    */
+    "#D4BFFF", /* magenta */
+    "#7ad0c6", /* cyan    */
+    "#e8dccb", /* white   */
 
-	/* 8 bright colors */
-	"#303030", /* black   */
-	"#FF3333", /* red     */
-	"#B8CC52", /* green   */
-	"#FF8F40", /* yellow  */
-	"#59C2FF", /* blue    */
-	"#D4BFFF", /* magenta */
-	"#95E6CB", /* cyan    */
-	"#F0F0F0", /* white   */
+    /* 8 bright colors */
+    "#131415", /* black   */
+    "#c03b3b", /* red     */
+    "#2ec09c", /* green   */
+    "#e7c547", /* yellow  */
+    "#7aa6ff", /* blue    */
+    "#D4BFFF", /* magenta */
+    "#7ad0c6", /* cyan    */
+    "#e8dccb", /* white   */
 
-	[255] = 0,
+    [255] = 0,
 
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#0A0E14", /* background */
-	"#B3B1AD", /* foreground */
-	"black",
+    /* more colors can be added after 255 to use with DefaultXX */
+    "#00161d", /* background */
+    "#d1b896", /* foreground */
+    "black",
 };
 
 /*
