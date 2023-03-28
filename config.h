@@ -148,7 +148,7 @@ wchar_t *worddelimiters = L" ";
 int allowaltscreen = 1;
 
 /* default TERM value */
-char *termname = "st-256color";
+char *termname = "xterm-256color";
 
 /*
  * Color used to display font attributes when fontconfig selected a font which
