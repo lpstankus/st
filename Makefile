@@ -19,9 +19,11 @@ PKG_CONFIG = pkg-config
 # includes and libs
 INCS = -I$(X11INC) \
        `$(PKG_CONFIG) --cflags fontconfig` \
+       `$(PKG_CONFIG) --cflags harfbuzz` \
        `$(PKG_CONFIG) --cflags freetype2`
 LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft -lXrender\
        `$(PKG_CONFIG) --libs fontconfig` \
+       `$(PKG_CONFIG) --libs harfbuzz` \
        `$(PKG_CONFIG) --libs freetype2`
 
 # flags
@@ -29,7 +31,7 @@ STCPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
 STCFLAGS = $(INCS) $(STCPPFLAGS) $(CPPFLAGS) $(CFLAGS)
 STLDFLAGS = $(LIBS) $(LDFLAGS)
 
-SRC = st.c x.c boxdraw.c
+SRC = st.c x.c boxdraw.c hb.c
 OBJ = $(SRC:.c=.o)
 
 all: options st
@@ -43,8 +45,9 @@ options:
 .c.o:
 	$(CC) $(STCFLAGS) -c $<
 
+hb.o: st.h
 st.o: config.h st.h win.h theme.h
-x.o: arg.h config.h st.h win.h theme.h
+x.o: arg.h config.h st.h win.h theme.h hb.h
 boxdraw.o: config.h st.h boxdraw_data.h theme.h
 
 st: $(OBJ)
